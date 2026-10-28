@@ -129,6 +129,43 @@ tbody tr:hover {
   margin: 0;
 }
 
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #3b2a20;
+  background-color: #e6b689;
+  border: 2px solid #855f42;
+  border-radius: 4px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background-color: #855f42;
+  color: rgb(253, 239, 221);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qty {
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.clear-button {
+  margin-top: 0.5rem;
+}
+
 @media (min-width: 700px) {
   main {
     display: grid;
