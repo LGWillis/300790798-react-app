@@ -11,8 +11,7 @@ A React website for Luke's Cookies that uses Vite. The page displays a selection
 Clone this repository:
 git clone https://github.com/LGWillis/300790798-react-app
 
-Enter the project folder:
-cd lukes-cookies-react
+Enter the project folder
 
 Install the dependencies:
 npm install
