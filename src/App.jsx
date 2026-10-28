@@ -1,59 +1,61 @@
+import { useState } from 'react';
 import './App.css';
 import { cookies } from './cookies.js';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
+import About from './components/About';
+import CookieLineup from './components/CookieLineup';
+import CookieRow from './components/CookieRow';
+import OrderSummary from './components/OrderSummary';
+import Footer from './components/Footer';
+
+const navLinks = [
+  { href: '#about', label: 'Who I am' },
+  { href: '#cookies', label: 'Cookie Lineup' },
+  { href: '#descriptions', label: 'Cookie Descriptions' },
+  { href: '#order', label: 'My Order' },
+];
 
 function App() {
+  // State
+  const [quantities, setQuantities] = useState({});
+
+  function handleAdd(id) {
+    setQuantities((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+  }
+
+  function handleRemove(id) {
+    setQuantities((prev) => {
+      const next = { ...prev };
+      if (next[id] > 1) {
+        next[id] -= 1;
+      } else {
+        delete next[id];
+      }
+      return next;
+    });
+  }
+
+  function handleClear() {
+    setQuantities({});
+  }
+
+  // Derived values
+  const orderedCookies = cookies.filter((cookie) => quantities[cookie.id]);
+  const totalCount = orderedCookies.reduce((sum, c) => sum + quantities[c.id], 0);
+  const totalPrice = orderedCookies.reduce((sum, c) => sum + quantities[c.id] * c.price, 0);
+
   return (
     <>
-      <header className="site-header">
-        <h1>Luke's Cookies</h1>
-      </header>
-
-      <nav className="site-nav">
-        <a href="#about">Who I am</a>
-        <a href="#cookies">Cookie Lineup</a>
-        <a href="#descriptions">Cookie Descriptions</a>
-      </nav>
+      <Header title="Luke's Cookies" />
+      <NavBar links={navLinks} />
 
       <main>
-        <section id="about">
-          <h2>Learn about Luke's Cookies</h2>
-          <p>
-            When I started Luke's Cookies, I had no idea where to begin.
-            I knew I loved to bake desserts of all varieties, but I wasn't
-            sure how to turn that passion into a business. After careful
-            consideration of many career paths, I decided to specialize
-            in selling gourmet cookies and other baked goods.
-          </p>
-          <p>
-            I now offer four permanent cookie flavors, with one monthly
-            special. You can purchase my cookies online or in person at
-            the University of Rio Grande's campus. Thank you for your support!
-          </p>
-        </section>
-
-        <section id="cookies">
-          <h2>Current Cookie Lineup</h2>
-          <p>
-            At Luke's Cookies, we offer four permanent cookie flavors,
-            with one monthly special. This month's lineup includes:
-          </p>
-
-          <ul className="cookie-list">
-            {cookies.map((cookie) => (
-              <li key={cookie.name}>{cookie.name}</li>
-            ))}
-          </ul>
-
-          <img
-            className="cookie-image"
-            src="/images/cookies.jpg"
-            alt="An assortment of gourmet cookies"
-          />
-        </section>
+        <About />
+        <CookieLineup cookies={cookies} />
 
         <section id="descriptions">
           <h2>Cookie Descriptions</h2>
-
           <div className="table-wrap">
             <table>
               <thead>
@@ -61,26 +63,34 @@ function App() {
                   <th>Flavor</th>
                   <th>Description</th>
                   <th>Price</th>
+                  <th>Order</th>
                 </tr>
               </thead>
-
               <tbody>
                 {cookies.map((cookie) => (
-                  <tr key={cookie.name}>
-                    <td>{cookie.name}</td>
-                    <td>{cookie.description}</td>
-                    <td>${cookie.price.toFixed(2)}</td>
-                  </tr>
+                  <CookieRow
+                    key={cookie.id}
+                    cookie={cookie}
+                    quantity={quantities[cookie.id] || 0}
+                    onAdd={handleAdd}
+                    onRemove={handleRemove}
+                  />
                 ))}
               </tbody>
             </table>
           </div>
         </section>
+
+        <OrderSummary
+          items={orderedCookies}
+          quantities={quantities}
+          totalCount={totalCount}
+          totalPrice={totalPrice}
+          onClear={handleClear}
+        />
       </main>
 
-      <footer className="site-footer">
-        <p>Luke's Cookies | 2026</p>
-      </footer>
+      <Footer text="Luke's Cookies | 2026" />
     </>
   );
 }
