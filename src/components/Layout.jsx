@@ -4,9 +4,9 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/cookies', label: 'Cookie Menu' },
-  { href: '/order', label: 'My Order' },
+  { to: '/', label: 'Home', end: true },
+  { to: '/cookies', label: 'Cookie Menu' },
+  { to: '/order', label: 'My Order' },
 ];
 
 function Layout() {

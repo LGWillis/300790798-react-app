@@ -1,8 +1,12 @@
+import { NavLink } from 'react-router-dom';
+
 function NavBar({ links }) {
   return (
     <nav className="site-nav">
       {links.map((link) => (
-        <a key={link.href} href={link.href}>{link.label}</a>
+        <NavLink key={link.to} to={link.to} end={link.end}>
+          {link.label}
+        </NavLink>
       ))}
     </nav>
   );

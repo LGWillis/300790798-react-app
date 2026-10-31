@@ -59,6 +59,11 @@ p {
   text-decoration: underline;
 }
 
+.site-nav a.active {
+  background-color: #e6b689;
+  border-bottom: 3px solid #855f42;
+}
+
 main {
   width: 90%;
   max-width: 1300px;
