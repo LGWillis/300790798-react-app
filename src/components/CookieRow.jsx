@@ -1,7 +1,11 @@
+import { Link } from 'react-router-dom';
+
 function CookieRow({ cookie, quantity, onAdd, onRemove }) {
   return (
     <tr>
-      <td>{cookie.name}</td>
+      <td>
+        <Link to={`/cookies/${cookie.id}`}>{cookie.name}</Link>
+      </td>
       <td>{cookie.description}</td>
       <td>${cookie.price.toFixed(2)}</td>
       <td>

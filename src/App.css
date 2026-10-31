@@ -71,6 +71,15 @@ main {
   padding: 2rem 0;
 }
 
+main a {
+  color: #5a3825;
+  font-weight: bold;
+}
+
+main a:hover {
+  background-color: #e6b689;
+}
+
 section {
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -179,7 +188,8 @@ button:disabled {
   }
 
   #descriptions,
-  #order {
+  #order,
+  #cookie-details {
     grid-column: 1 / -1;
   }
 }
