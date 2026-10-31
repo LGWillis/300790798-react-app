@@ -1,6 +1,14 @@
 # Luke's Cookies React App
 
-A React website for Luke's Cookies that uses Vite. The page displays a selection of specialty cookies, their descriptions, and prices. Additional features to come
+A React website for Luke's Cookies that uses Vite. The page displays a selection of specialty cookies, their descriptions, and prices. Cookies can be added to an order as well.
+
+# Route Plan
+Planned Urls:
+/  >  Home page
+/cookies  >  Cookie table with descriptions
+/cookies/:id  >  Individual cookie details
+/order  >  Current order
+'*'  >  Not found
 
 # Requirements
 
