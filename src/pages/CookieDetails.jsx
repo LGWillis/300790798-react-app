@@ -1,8 +1,14 @@
 import { Link, useParams } from 'react-router-dom';
+import NotFound from './NotFound';
 
 function CookieDetails({ cookies, quantities, onAdd, onRemove }) {
   const { id } = useParams();
   const cookie = cookies.find((c) => c.id === Number(id));
+  
+  if (!cookie) {
+    return <NotFound message={`No cookie found with the id "${id}".`} />;
+  }
+
   const quantity = quantities[cookie.id] || 0;
 
   return (
