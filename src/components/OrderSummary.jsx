@@ -4,7 +4,7 @@ function OrderSummary({ items, quantities, totalCount, totalPrice, onClear }) {
       <h2>My Order</h2>
 
       {totalCount === 0 ? (
-        <p>Your order is empty. Use the + buttons above to add cookies.</p>
+        <p>Your order is empty. Use the + and -buttons to add or remove cookies from order.</p>
       ) : (
         <>
           <ul className="cookie-list">
