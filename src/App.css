@@ -189,7 +189,8 @@ button:disabled {
 
   #descriptions,
   #order,
-  #cookie-details {
+  #cookie-details,
+  #not-found {
     grid-column: 1 / -1;
   }
 }

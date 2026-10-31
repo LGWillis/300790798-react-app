@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import CookieMenu from './pages/CookieMenu';
 import CookieDetails from './pages/CookieDetails';
 import Order from './pages/Order';
+import NotFound from './pages/NotFound';
 
 function App() {
   // Shared state: { [cookieId]: quantity }
@@ -68,6 +69,7 @@ function App() {
             />
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
