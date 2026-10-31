@@ -173,7 +173,8 @@ button:disabled {
     gap: 2rem;
   }
 
-  #descriptions {
+  #descriptions,
+  #order {
     grid-column: 1 / -1;
   }
 }

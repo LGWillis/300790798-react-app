@@ -1,23 +1,14 @@
 import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import { cookies } from './cookies.js';
-import Header from './components/Header';
-import NavBar from './components/NavBar';
-import About from './components/About';
-import CookieLineup from './components/CookieLineup';
-import CookieRow from './components/CookieRow';
-import OrderSummary from './components/OrderSummary';
-import Footer from './components/Footer';
-
-const navLinks = [
-  { href: '#about', label: 'Who I am' },
-  { href: '#cookies', label: 'Cookie Lineup' },
-  { href: '#descriptions', label: 'Cookie Descriptions' },
-  { href: '#order', label: 'My Order' },
-];
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import CookieMenu from './pages/CookieMenu';
+import Order from './pages/Order';
 
 function App() {
-  // State
+  // Shared state: { [cookieId]: quantity }
   const [quantities, setQuantities] = useState({});
 
   function handleAdd(id) {
@@ -40,58 +31,33 @@ function App() {
     setQuantities({});
   }
 
-  // Derived values
-  const orderedCookies = cookies.filter((cookie) => quantities[cookie.id]);
-  const totalCount = orderedCookies.reduce((sum, c) => sum + quantities[c.id], 0);
-  const totalPrice = orderedCookies.reduce((sum, c) => sum + quantities[c.id] * c.price, 0);
-
   return (
-    <>
-      <Header title="Luke's Cookies" />
-      <NavBar links={navLinks} />
-
-      <main>
-        <About />
-        <CookieLineup cookies={cookies} />
-
-        <section id="descriptions">
-          <h2>Cookie Descriptions</h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Flavor</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Order</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cookies.map((cookie) => (
-                  <CookieRow
-                    key={cookie.id}
-                    cookie={cookie}
-                    quantity={quantities[cookie.id] || 0}
-                    onAdd={handleAdd}
-                    onRemove={handleRemove}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <OrderSummary
-          items={orderedCookies}
-          quantities={quantities}
-          totalCount={totalCount}
-          totalPrice={totalPrice}
-          onClear={handleClear}
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home cookies={cookies} />} />
+        <Route
+          path="cookies"
+          element={
+            <CookieMenu
+              cookies={cookies}
+              quantities={quantities}
+              onAdd={handleAdd}
+              onRemove={handleRemove}
+            />
+          }
         />
-      </main>
-
-      <Footer text="Luke's Cookies | 2026" />
-    </>
+        <Route
+          path="order"
+          element={
+            <Order
+              cookies={cookies}
+              quantities={quantities}
+              onClear={handleClear}
+            />
+          }
+        />
+      </Route>
+    </Routes>
   );
 }
 
