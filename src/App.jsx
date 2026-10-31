@@ -5,6 +5,7 @@ import { cookies } from './cookies.js';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import CookieMenu from './pages/CookieMenu';
+import CookieDetails from './pages/CookieDetails';
 import Order from './pages/Order';
 
 function App() {
@@ -39,6 +40,17 @@ function App() {
           path="cookies"
           element={
             <CookieMenu
+              cookies={cookies}
+              quantities={quantities}
+              onAdd={handleAdd}
+              onRemove={handleRemove}
+            />
+          }
+        />
+        <Route
+          path="cookies/:id"
+          element={
+            <CookieDetails
               cookies={cookies}
               quantities={quantities}
               onAdd={handleAdd}
