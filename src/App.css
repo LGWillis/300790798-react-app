@@ -63,6 +63,17 @@ p {
   background-color: #e6b689;
   border-bottom: 3px solid #855f42;
 }
+.nav-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-greeting {
+  font-weight: bold;
+  color: #5a3825;
+}
 
 main {
   width: 90%;
@@ -176,8 +187,70 @@ button:disabled {
   text-align: center;
 }
 
-.clear-button {
+.order-actions,
+.checkout-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.button-link {
+  display: inline-block;
+  font-weight: bold;
+  color: #3b2a20;
+  background-color: #e6b689;
+  border: 2px solid #855f42;
+  border-radius: 4px;
+  padding: 0.3rem 0.8rem;
+  text-decoration: none;
+}
+
+.button-link:hover {
+  background-color: #855f42;
+  color: rgb(253, 239, 221);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 28rem;
+}
+
+.auth-form label {
+  font-weight: bold;
   margin-top: 0.5rem;
+}
+
+.auth-form input {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 2px solid #e6b689;
+  border-radius: 4px;
+  background-color: #fffaf4;
+  color: #3b2a20;
+}
+
+.auth-form input:focus {
+  outline: 3px solid #855f42;
+  outline-offset: 1px;
+}
+
+.auth-form button {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+}
+
+.form-message {
+  margin: 0.5rem 0 0;
+  font-weight: bold;
+}
+
+.form-message.error {
+  color: #8a1c1c;
 }
 
 @media (min-width: 700px) {
@@ -190,7 +263,12 @@ button:disabled {
   #descriptions,
   #order,
   #cookie-details,
-  #not-found {
+  #not-found,
+  #login,
+  #checkout,
+  #orders,
+  #order-details,
+  #access-denied {
     grid-column: 1 / -1;
   }
 }
