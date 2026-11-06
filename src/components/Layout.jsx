@@ -9,11 +9,16 @@ const navLinks = [
   { to: '/order', label: 'My Order' },
 ];
 
-function Layout() {
+function Layout({ currentUser, authLoading, onLogout }) {
   return (
     <>
       <Header title="Luke's Cookies" />
-      <NavBar links={navLinks} />
+      <NavBar
+        links={navLinks}
+        currentUser={currentUser}
+        authLoading={authLoading}
+        onLogout={onLogout}
+      />
       <main>
         <Outlet />
       </main>
