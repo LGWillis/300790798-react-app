@@ -1,10 +1,15 @@
+import { Link } from 'react-router-dom';
+
 function OrderSummary({ items, quantities, totalCount, totalPrice, onClear }) {
   return (
     <section id="order">
       <h2>My Order</h2>
 
       {totalCount === 0 ? (
-        <p>Your order is empty. Use the + and -buttons to add or remove cookies from order.</p>
+        <p>
+          Your order is empty. Add cookies from the{' '}
+          <Link to="/cookies">Cookie Menu</Link>.
+        </p>
       ) : (
         <>
           <ul className="cookie-list">
@@ -17,9 +22,15 @@ function OrderSummary({ items, quantities, totalCount, totalPrice, onClear }) {
           </ul>
           <p><strong>Total cookies:</strong> {totalCount}</p>
           <p><strong>Total price:</strong> ${totalPrice.toFixed(2)}</p>
-          <button type="button" className="clear-button" onClick={onClear}>
-            Clear Order
-          </button>
+
+          <div className="order-actions">
+            <Link className="button-link" to="/checkout">
+              Proceed to Checkout
+            </Link>
+            <button type="button" className="clear-button" onClick={onClear}>
+              Clear Order
+            </button>
+          </div>
         </>
       )}
     </section>
